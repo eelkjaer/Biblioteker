@@ -1,16 +1,14 @@
 package Model;
 
-import java.util.ArrayList;
-
 public class Library {
     //postnr(0),by(1),kortnavn(2),væsensnavn(3),adresse(4),latitude(5),bibliotekstype(6),id(7),longitude(8),navn(9)
     //2750,Ballerup,Ballerup Bibliotek,Ballerup Bibliotekerne,Banegårdspladsen 1,55.729601,Folkebibliotek,715100,12.359601,Ballerup Bibliotek
-    private double id;
-    private double postal,latitude,longitude;
+    private double id, latitude,longitude;
+    private int postal;
     private String city, mapName, callName, address, type, name;
 
 
-    public Library(double id, double postal, double latitude, double longitude, String city, String mapName, String callName, String address, String type, String name) {
+    public Library(double id, int postal, double latitude, double longitude, String city, String mapName, String callName, String address, String type, String name) {
         this.id = id;
         this.postal = postal;
         this.latitude = latitude;
@@ -27,7 +25,7 @@ public class Library {
         return id;
     }
 
-    public double getPostal() {
+    public int getPostal() {
         return postal;
     }
 

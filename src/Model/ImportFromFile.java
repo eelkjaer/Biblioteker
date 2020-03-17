@@ -11,22 +11,30 @@ public class ImportFromFile {
 
     ArrayList<Library> libs = new ArrayList<>();
 
-    public ArrayList<Library> importLibarysFromFile(String filePath) throws FileNotFoundException {
+    public ArrayList<Library> importLibarysFromFile(String filePath, String filter) throws FileNotFoundException {
         File fh = new File(filePath);
-        int numberofLibs = 0;
         if (fh.exists()) {
             Scanner file = new Scanner(fh);
             while (file.hasNextLine()) {
                 String line = file.nextLine();
-                String[] lineArr = line.split(",");
+                String[] lineArr = line.split(";");
                 try {
                     Library tmpLib = new Library(Double.parseDouble(lineArr[7]),
-                            Double.parseDouble(lineArr[0]), Double.parseDouble(lineArr[5]), Double.parseDouble(lineArr[8]),
+                            Integer.parseInt(lineArr[0]), Double.parseDouble(lineArr[5]), Double.parseDouble(lineArr[8]),
                                                 lineArr[1], lineArr[2], lineArr[3], lineArr[4], lineArr[6], lineArr[9]);
 
-                    libs.add(tmpLib);
 
-                    numberofLibs++;
+
+                    String tmpSplit[] = filter.split("-");
+                    int[] postalSplit = {Integer.parseInt(tmpSplit[0]),Integer.parseInt(tmpSplit[1])};
+
+                    if(filter != null && !filter.isEmpty()){
+                        if (postalSplit[0] <= Integer.parseInt(lineArr[0]) && Integer.parseInt(lineArr[0]) <= postalSplit[1]) {
+                            libs.add(tmpLib);
+                        }
+                    } else {
+                        libs.add(tmpLib);
+                    }
                 } catch (Exception e){
                     System.out.println("ERROR: " + e.toString());
                 }
